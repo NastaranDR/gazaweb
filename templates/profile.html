@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود به حساب کاربری</title>
+    <link rel="stylesheet" href="../static/css/main.css">
+</head>
+<body class="select-none box-border ">
+    <!--start header-->
+  <header class="desktop:w-full desktop:h-[90px] desktop:bg-blue-950 desktop:flex desktop:flex-row ">
+    <div class="header-right desktop:w-[55%] ">
+      <h5 class="declare desktop:text-white desktop:w-auto desktop:h-[90px]  desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[27px]">سایت پژوهشی گهر</h5>
+    </div>
+    <div class="header-left desktop:w-[45%]  desktop:flex desktop:flex-row desktop:justify-center desktop:items-center desktop:gap-x-20">
+      <div class="first-page"><a href="{% url 'members' %}" class="desktop:w-auto desktop:h-auto desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
+        اعضای تیم
+      </a></div>
+      <div class="about-us"><a href="{% url 'profile' %}" class="desktop:w-auto desktop:h-auto desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
+       کارتابل
+      </a></div>
+      <div class="user-login"><a href="{% url 'logout' %}" class="desktop:w-auto desktop:h-auto desktop:px-[14px] desktop:py-[8px] desktop:rounded-[7px] desktop:bg-cyan-700 desktop:text-white desktop:text-[17px] desktop:hover:bg-cyan-900 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
+        خروج      </a></div>
+      <div class="user-login"></div>
+    </div>
+  </header>
+  <!--end header-->
+
+  <main style="background-image: url('{% static "images/back.jpg" %}');" class="desktop:w-full desktop:h-auto desktop:bg-cover desktop:flex desktop:flex-row desktop:justify-center desktop:py-[100px]">
+    <!--start information-->
+    <div class="main-center desktop:w-[70%] desktop:h-auto desktop:bg-white desktop:bg-opacity-[50%] desktop:backdrop-blur-lg desktop:rounded-[25px] desktop:pb-[120px] desktop:border-gray-300 desktop:border-solid desktop:border-[3px] desktop:shadow-2xl desktop:shadow-black">
+        <div class="profile desktop:w-full desktop:h-auto desktop:flex desktop:flex-row desktop:mt-[30px] ">
+            <div class="script desktop:w-1/2 desktop:h-auto desktop:mr-[50px]">
+                <div class="first-name desktop:w-full desktop:flex desktop:flex-row desktop:mt-[80px]">
+                    <h5 class="desktop:text-[22px] desktop:font-[yekan]">نام کاربر:</h5>
+                    <h5 class="desktop:text-[22px] desktop:font-[yekan] desktop:mr-[10px]">{{member.fname}} {{member.lname}}</h5>
+                </div>
+                <div class="number desktop:w-full desktop:flex desktop:flex-row desktop:mt-[15px]">
+                    <h5 class="desktop:text-[22px] desktop:font-[yekan]">شماره تماس:</h5>
+                    <h5 class="desktop:text-[22px] desktop:font-[yekan] desktop:mr-[10px]">{{member.phone_number}}</h5>
+                </div>
+                <div class="role desktop:w-full desktop:flex desktop:flex-row desktop:mt-[15px]">
+                    <h5 class="desktop:text-[22px] desktop:font-[yekan]">نقش کاربر:</h5>
+                    <h5 class="desktop:text-[22px] desktop:font-[yekan] desktop:mr-[10px]">{{role}}</h5>
+                </div>
+                {% if member.resume %}
+                <a href="{{member.resume.url}}" class=" desktop:block desktop:h-[45px] desktop:w-[150px] desktop:bg-cyan-600 desktop:text-white
+                desktop:text-[18px] desktop:font-[yekan] desktop:rounded-[10px] desktop:text-center desktop:mt-[40px] desktop:leading-[45px]  desktop:hover:bg-cyan-900 desktop:duration-200 desktop:transition-all"><span>دانلود رزومه</span></a>
+                {% endif %}
+            </div>
+            {% if member.image %}
+            <div class="profile-image desktop:w-[230px] aspect-[3/4]  desktop:rounded-[15px] desktop:mt-[50px] desktop:mr-[100px]">
+                <img src="{{ member.image.url }}" alt="تصویر" class="desktop:rounded-[15px] w-full h-full object-cover ">
+            </div>
+            {% endif %}
+        </div>
+        <div class="cards-wrap desktop:w-full desktop:h-auto desktop:mt-[70px]">
+            <div class="card-top desktop:w-full desktop:h-auto"><h5 class="desktop:h-auto desktop:pr-[50px] desktop:text-[23px] desktop:font-[yekan]">پروژه های در درسترس:</h5></div>
+            <div class="card-bottom desktop:w-full desktop:h-auto desktop:flex desktop:flex-row desktop:justify-evenly desktop:flex-wrap desktop:gap-y-7">
+
+              {% for project in projects %}
+                  <div class="card desktop:w-[320px] desktop:h-auto desktop:bg-gray-300 desktop:rounded-[15px] desktop:overflow-hidden desktop:shadow-lg  desktop:mt-[40px]">
+                    <img src="../static/images/index.jpg" alt="Sample Image" class="desktop:w-full desktop:h-[200px] desktop:object-cover">
+                    <div class="desktop:p-[20px]">
+                      <h3 class="desktop:text-[20px] desktop:font-bold desktop:mb-[10px]">{{project.title}}</h3>
+                      <p class="desktop:text-[16px] desktop:leading-[28px] desktop:text-justify">{{project.description}}</p>
+                      <a href="{% url 'project_detail' pk=project.id %}" class="desktop:block desktop:w-fit desktop:h-fit desktop:py-[10px] desktop:px-[14px] desktop:rounded-[12px] desktop:bg-cyan-700 desktop:font-[yekan] desktop:mt-[35px] desktop:text-white desktop:m-auto desktop:hover:bg-cyan-900 desktop:transition-all desktop:duration-300"><span>جزییات پروژه</span></a>
+                    </div>
+                  </div>
+              {% endfor %}
+            </div>
+          </div>
+  </main>
+  <!--start footer-->
+  <footer class="desktop:w-full desktop:h-[150px] desktop:bg-blue-950 ">
+    <h5 class="desktop:text-white desktop:w-auto desktop:h-[90px]  desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[20px] desktop:text-center">مرکز پژوهشی گهر</h5>
+    <div class="info desktop:flex desktop:flex-row ">
+      <div class="info-right desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pr-[100px] desktop:hover:text-cyan-500 desktop:duration-300 desktop:transition-all desktop:cursor-pointer">
+         تلفن : 09945688202
+      </div>
+      <div class="useablity desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pl-[270px] desktop:pr-[380px]">تمامی حقوق محفوظ است © 2024</div>
+      <div class="email desktop:text-[20px] desktop:text-white desktop:font-[yekan]  desktop:hover:text-cyan-500 desktop:duration-300 desktop:transition-all desktop:cursor-pointer">ایمیل : gahar@gmail.com</div>
+      <div class="info-left"></div>
+    </div>
+
+  </footer>
+   <!--end footer-->
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+Django==4.2.3
+psycopg2-binary==2.9.10
+djangorestframework==3.14.0
+django-crispy-forms==1.14.0
+Pillow==11.1.0
+django-filter==23.2
+# برای احراز هویت و مدیریت کاربران
+bcrypt==4.0.1
+django-allauth==0.55.2
+
+# برای کار با محیط مجازی و پیکربندی
+python-dotenv==1.0.0
+
+# برای استفاده از Docker در محیط توسعه
+docker==6.1.3
+
+# برای امنیت و کنترل دسترسی
+djangorestframework-simplejwt==5.2.2
+
+phonenumbers==8.12.50
+django-phonenumber-field==7.1.0
+
+django-simple-captcha==0.6.2
+
+django-environ==0.12.0
+
+crispy-tailwind==1.0.3
+
+django-jalali
+gunicorn
+

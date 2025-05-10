@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود اعضا</title>
+    <link rel="stylesheet" href="../static/css/main.css">
+</head>
+<body class="select-none box-border ">
+    <!--start header-->
+  <header class="desktop:w-full desktop:h-[90px] desktop:bg-blue-950 desktop:flex desktop:flex-row ">
+    <div class="header-right desktop:w-[55%] ">
+      <h5 class="declare desktop:text-white desktop:w-auto desktop:h-[90px]  desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[27px]">سایت پژوهشی گهر</h5>
+    </div>
+    <div class="header-left desktop:w-[45%]  desktop:flex desktop:flex-row desktop:justify-center desktop:items-center desktop:gap-x-20">
+      <div class="first-page"><a href="{% url 'home' %}" class="desktop:w-auto desktop:h-auto desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
+        صفحه اصلی
+      </a></div>
+      <div class="about-us"><a href="{% url 'about' %}" class="desktop:w-auto desktop:h-auto desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
+       درباره ما
+      </a></div>
+      <div class="user-login"><a href="{% url 'login' %}" class="desktop:w-auto desktop:h-auto desktop:px-[14px] desktop:py-[8px] desktop:rounded-[7px] desktop:bg-cyan-700 desktop:text-white desktop:text-[17px] desktop:hover:bg-cyan-900 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
+        ورود اعضا      </a></div>
+      <div class="user-login"></div>
+    </div>
+  </header>
+  <!--end header-->
+  <main style="background-image: url('{% static "images/back.jpg" %}');" class="desktop:w-full desktop:h-auto desktop:bg-cover desktop:flex desktop:flex-row desktop:justify-center desktop:py-[100px]">
+    <!--start login-->
+    <div class="main-center desktop:w-[500px] desktop:h-auto desktop:bg-white desktop:bg-opacity-[46%] desktop:backdrop-blur-lg desktop:rounded-[25px] desktop:pb-[100px] desktop:border-gray-300 desktop:border-solid desktop:border-[3px] desktop:shadow-2xl desktop:shadow-black">
+        <h5 class="desktop:text-center desktop:mt-[60px] desktop:text-[26px] desktop:font-[yekan]">درخواست همکاری</h5>
+
+<div class="max-w-lg mx-auto bg-white p-6 mt-8 rounded-lg shadow-md">
+    <form method="post" enctype="multipart/form-data" class="space-y-4">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="flex flex-col space-y-2">
+                <label class="font-medium text-gray-700">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <p class="text-sm text-gray-500">{{ field.help_text }}</p>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p class="text-red-500 text-sm">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+    <button type="submit"
+        class="desktop:block desktop:w-[88%] desktop:h-[55px] desktop:rounded-[12px] desktop:bg-cyan-700 desktop:m-auto desktop:text-white desktop:mt-[70px] desktop:cursor-pointer hover:bg-cyan-900 transition">
+        ارسال
+    </button>
+    </form>
+</div>
+
+
+    </div>
+    <!--end login-->
+  </main>
+   <!--start footer-->
+   <footer class="desktop:w-full desktop:h-[150px] desktop:bg-blue-950 ">
+    <h5 class="desktop:text-white desktop:w-auto desktop:h-[90px]  desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[20px] desktop:text-center">مرکز پژوهشی گهر</h5>
+    <div class="info desktop:flex desktop:flex-row ">
+      <div class="info-right desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pr-[100px] desktop:hover:text-cyan-500 desktop:duration-300 desktop:transition-all desktop:cursor-pointer">
+         تلفن : 09945688202
+      </div>
+      <div class="useablity desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pl-[270px] desktop:pr-[380px]">تمامی حقوق محفوظ است © 2024</div>
+      <div class="email desktop:text-[20px] desktop:text-white desktop:font-[yekan]  desktop:hover:text-cyan-500 desktop:duration-300 desktop:transition-all desktop:cursor-pointer">ایمیل : gahar@gmail.com</div>
+      <div class="info-left"></div>
+    </div>
+
+  </footer>
+   <!--end footer-->
+</body>
+</html>
