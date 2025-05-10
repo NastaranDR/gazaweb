@@ -1,12 +1,80 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ project.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
-<body>
-    <h2>{{ project.title }}</h2>
-    <p>{{ project.description }}</p>
-    <a href="{{ project.file.url }}" download>دانلود فایل تفضیلی پروژه</a>
+<body class="select-none box-border">
+
+<!-- Header -->
+<header class="desktop:w-full desktop:h-[90px] desktop:bg-blue-950 desktop:flex desktop:flex-row">
+    <div class="header-right desktop:w-[55%]">
+        <h5 class="declare desktop:text-white desktop:w-auto desktop:h-[90px] desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[27px]">
+            سایت پژوهشی گهر
+        </h5>
+    </div>
+    <div class="header-left desktop:w-[45%] desktop:flex desktop:flex-row desktop:justify-center desktop:items-center desktop:gap-x-20">
+        <div class="first-page">
+            <a href="{% url 'members' %}" class="desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan]">
+                اعضای تیم
+            </a>
+        </div>
+        <div class="about-us">
+            <a href="{% url 'profile' %}" class="desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan]">
+                کارتابل
+            </a>
+        </div>
+        <div class="user-login">
+            <a href="{% url 'logout' %}" class="desktop:px-[14px] desktop:py-[8px] desktop:rounded-[7px] desktop:bg-cyan-700 desktop:text-white desktop:text-[17px] desktop:hover:bg-cyan-900 desktop:transition-all desktop:duration-300 desktop:font-[yekan]">
+                خروج
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Main -->
+<main style="background-image: url('{% static "images/back.jpg" %}');" class="desktop:w-full desktop:h-auto desktop:bg-cover desktop:flex desktop:justify-center desktop:py-[100px]">
+    <div class="main-center desktop:w-[70%] desktop:bg-white desktop:bg-opacity-[50%] desktop:backdrop-blur-lg desktop:rounded-[25px] desktop:pb-[120px] desktop:border-gray-300 desktop:border-[3px] desktop:shadow-2xl desktop:shadow-black">
+        <div class="profile desktop:flex desktop:flex-row desktop:mt-[30px]">
+            <div class="script desktop:w-1/2 desktop:mr-[50px]">
+                <div class="first-name desktop:flex desktop:flex-row desktop:mt-[80px]">
+                    <h2 class="desktop:text-[22px] desktop:font-[yekan]">عنوان:</h2>
+                    <h3 class="desktop:text-[22px] desktop:font-[yekan] desktop:mr-[10px]">{{ project.title }}</h3>
+                </div>
+                <div class="first-name desktop:flex desktop:flex-row desktop:mt-[80px]">
+                    <h2 class="desktop:text-[22px] desktop:font-[yekan]">توضیحات:</h2>
+                    <h3 class="desktop:text-[22px] desktop:font-[yekan] desktop:mr-[10px]">{{ project.description }}</h3>
+                </div>
+                {% if member.resume %}
+                <a href="{{ project.file.url }}" class="desktop:block desktop:h-[45px] desktop:w-[150px] desktop:bg-cyan-600 desktop:text-white desktop:text-[18px] desktop:font-[yekan] desktop:rounded-[10px] desktop:text-center desktop:mt-[40px] desktop:leading-[45px] desktop:hover:bg-cyan-900 desktop:duration-200 desktop:transition-all">
+                    دانلود فایل نیاز تفضیلی
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="desktop:w-full desktop:h-[150px] desktop:bg-blue-950">
+    <h5 class="desktop:text-white desktop:h-[90px] desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[20px] desktop:text-center">
+        مرکز پژوهشی گهر
+    </h5>
+    <div class="info desktop:flex desktop:flex-row">
+        <div class="info-right desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pr-[100px] desktop:hover:text-cyan-500 desktop:transition-all desktop:cursor-pointer">
+            تلفن : 09945688202
+        </div>
+        <div class="useablity desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pl-[270px] desktop:pr-[380px]">
+            تمامی حقوق محفوظ است © 2024
+        </div>
+        <div class="email desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:hover:text-cyan-500 desktop:transition-all desktop:cursor-pointer">
+            ایمیل : gahar@gmail.com
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>

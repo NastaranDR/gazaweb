@@ -42,13 +42,9 @@ def request_collaboration(request):
     if request.method == "POST":
         form = RequestCollaborationForm(request.POST, request.FILES)
         if form.is_valid():
-            collab = form.save(commit=False)
-            otp = generate_otp()
-            collab.otp_code = otp
-            collab.otp_created_at = timezone.now()
-            collab.save()
-            send_otp_email(collab.email, otp)
-            return redirect('verify_otp', collab_id=collab.id)
+            form.save()
+            return redirect('request_thank_you')
+
     else:
         form = RequestCollaborationForm()
 

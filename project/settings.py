@@ -47,7 +47,8 @@ CRISPY_TEMPLATE_PACK = "tailwind"
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
 
 ALLOWED_HOSTS = ['gaharai.ir', 'www.gaharai.ir', '37.32.5.107', 'localhost', '127.0.0.1']
 #فقط از طریق این دامنه ها به سرور متصل میشویم(در حالت توسعه)
