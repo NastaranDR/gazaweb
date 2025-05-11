@@ -11,6 +11,14 @@ from dotenv import load_dotenv
 from django.conf import settings
 import environ
 from django.views.generic import TemplateView
+import random
+from django.utils import timezone
+from django.shortcuts import render, redirect, get_object_or_404
+from django.core.mail import send_mail
+from django.conf import settings
+from .forms import RequestCollaborationForm
+from .models import Request_for_Collaboration
+from django.http import HttpResponse
 
 
 load_dotenv()
@@ -42,9 +50,13 @@ def request_collaboration(request):
     if request.method == "POST":
         form = RequestCollaborationForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('request_thank_you')
-
+            collab = form.save(commit=False)
+            otp = generate_otp()
+            collab.otp_code = otp
+            collab.otp_created_at = timezone.now()
+            collab.save()
+            send_otp_email(collab.email, otp)
+            return redirect('verify_otp', collab_id=collab.id)
     else:
         form = RequestCollaborationForm()
 
@@ -63,8 +75,6 @@ def verify_otp_view(request, collab_id):
             return HttpResponse('کد اشتباه است یا منقضی شده است.')
 
     return render(request, 'verify_otp.html', {'collab': collab})
-
-
 
 def request_thank_you(request):
     return render(request, 'request_thank_you.html')

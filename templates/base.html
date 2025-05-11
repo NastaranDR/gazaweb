@@ -1,34 +1,0 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مرکز پژوهشی گهر</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-</head>
-<body class="bg-gray-100 text-gray-900">
-    <!-- Header -->
-    <header class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
-        <h1 class="text-xl font-bold">سایت پژوهشی گهر</h1>
-        <nav>
-            <a href="{% url 'home' %}" class="px-4 text-gray-700 hover:text-blue-500">صفحه اصلی</a>
-            <a href="{% url 'about' %}" class="px-4 text-gray-700 hover:text-blue-500">درباره ما</a>
-            <a href="{% url 'login' %}" class="bg-blue-500 text-white px-4 py-2 rounded-md">ورود اعضا</a>
-        </nav>
-    </header>
-    <!-- محتوای صفحه -->
-    <div class="content-container">
-        {% block content %}{% endblock %}
-    </div>
-
-    <!-- فوتر -->
-    <footer class="bg-gray-800 text-white text-center py-6 mt-12">
-        <h5>مرکز پژوهشی گهر</h5>
-        <p> 📞: 09945688202</p>
-        <p> 📧: gahar@gmail.com</p>
-        <p>تمامی حقوق محفوظ است &copy; 2024</p>
-    </footer>
-</body>
-</html>

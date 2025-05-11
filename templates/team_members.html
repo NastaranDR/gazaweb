@@ -1,74 +1,184 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اعضای تیم</title>
-    <link rel="stylesheet" href="../static/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="theme-color" content="#172554">
+    <meta name="description" content="مرکز پژوهشی گهر - اعضای تیم {{ team.name }}">
+    <title>اعضای تیم - مرکز پژوهشی گهر</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blue: {
+                            950: '#172554',
+                        },
+                        cyan: {
+                            500: '#06b6d4',
+                            700: '#0e7490',
+                            900: '#164e63',
+                        },
+                    },
+                    screens: {
+                        'mobile': '320px',
+                        'tablet': '481px',
+                        'laptop': '1025px',
+                        'desktop': '1200px',
+                    },
+                },
+                fontFamily: {
+                    'yekan': ['yekan', 'sans-serif'],
+                },
+            },
+        }
+    </script>
+
+    <!-- Vazirmatn Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'yekan';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'yekan', sans-serif;
+        }
+
+        .backdrop-blur-lg {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
 </head>
-<body class="select-none box-border ">
-    <!--start header-->
-  <header class="desktop:w-full desktop:h-[90px] desktop:bg-blue-950 desktop:flex desktop:flex-row ">
-    <div class="header-right desktop:w-[55%] ">
-      <h5 class="declare desktop:text-white desktop:w-auto desktop:h-[90px]  desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[27px]">سایت پژوهشی گهر</h5>
-    </div>
-    <div class="header-left desktop:w-[45%]  desktop:flex desktop:flex-row desktop:justify-center desktop:items-center desktop:gap-x-20">
-      <div class="first-page"><a href="{% url 'members' %}" class="desktop:w-auto desktop:h-auto desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
-        اعضای تیم
-      </a></div>
-      <div class="about-us"><a href="{% url 'profile' %}" class="desktop:w-auto desktop:h-auto desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
-       کارتابل
-      </a></div>
-      <div class="user-login"><a href="{% url 'logout' %}" class="desktop:w-auto desktop:h-auto desktop:px-[14px] desktop:py-[8px] desktop:rounded-[7px] desktop:bg-cyan-700 desktop:text-white desktop:text-[17px] desktop:hover:bg-cyan-900 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
-        خروج      </a></div>
-      <div class="user-login"></div>
-    </div>
-  </header>
-  <!--end header-->
-  <main style="background-image: url('{% static "images/back.jpg" %}');" class="desktop:w-full desktop:h-auto desktop:bg-cover desktop:flex desktop:flex-row desktop:justify-center desktop:py-[100px]">
-    <!--start about us-->
-    <div class="main-center desktop:w-[70%] desktop:h-auto desktop:bg-white desktop:bg-opacity-[50%] desktop:backdrop-blur-lg desktop:rounded-[25px] desktop:pb-[120px] desktop:border-gray-300 desktop:border-solid desktop:border-[3px] desktop:shadow-2xl desktop:shadow-black">
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="w-full h-auto md:h-[90px] bg-blue-950 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center py-4 md:h-[90px]">
+                <!-- Logo & Title -->
+                <div class="w-full md:w-auto text-center md:text-right mb-4 md:mb-0">
+                    <h5 class="text-white text-xl md:text-2xl lg:text-[27px] font-[yekan]">سایت پژوهشی گهر</h5>
+                </div>
 
-        <div class="team-name desktop:w-full desktop:flex desktop:flex-row desktop:mt-[80px] desktop:mr-[50px]">
-            <h5 class="desktop:text-[20px] desktop:font-[yekan]">نام تیم:</h5>
-            <h5 class="desktop:text-[20px] desktop:font-[yekan] desktop:mr-[10px]">{{team.name}}</h5>
+                <!-- Mobile Menu Button -->
+                <button
+                    id="menuToggle"
+                    class="md:hidden absolute top-4 right-4 text-white focus:outline-none"
+                    aria-label="Toggle menu"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <!-- Navigation -->
+                <nav id="mainNav" class="w-full md:w-auto hidden md:block">
+                    <ul class="flex flex-col md:flex-row items-center gap-4 md:gap-6 lg:gap-x-20">
+                        <li>
+                            <a href="{% url 'members' %}" class="block text-white text-base hover:text-cyan-500 transition-all duration-300 font-[yekan] py-2 md:py-0">
+                                اعضای تیم
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'profile' %}" class="block text-white text-base hover:text-cyan-500 transition-all duration-300 font-[yekan] py-2 md:py-0">
+                                کارتابل
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'logout' %}" class="block px-[14px] py-[8px] rounded-[7px] bg-cyan-700 text-white text-base hover:bg-cyan-900 transition-all duration-300 font-[yekan] text-center">
+                                خروج
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        <div class="cards-wrap desktop:w-full desktop:h-auto desktop:mt-[70px]">
-            <div class="card-top desktop:w-full desktop:h-auto"><h5 class="desktop:h-auto desktop:pr-[50px] desktop:text-[20px] desktop:font-[yekan]">اعضای تیم:</h5></div>
-            <div class="card-bottom desktop:w-full desktop:h-auto desktop:flex desktop:flex-row desktop:justify-evenly desktop:flex-wrap desktop:gap-y-7">
+    </header>
 
-                {% for member in members %}
-                    <div class="card desktop:w-[310px] desktop:h-auto desktop:bg-gray-300 desktop:rounded-[15px] desktop:overflow-hidden desktop:shadow-lg  desktop:mt-[40px]">
-                        <div class="desktop:p-[20px]">
-                          <img src="{{ member.image.url }}" alt="تصویر" class="desktop:rounded-[15px] w-full h-full object-cover ">
-                          <h3 class="desktop:text-[20px] desktop:font-bold desktop:mb-[10px]">{{member.fname}} {{member.lname}}</h3>
-                          <p class="desktop:text-[16px] desktop:leading-[28px] desktop:text-justify">{{member.description}}</p>
-                          {% if member.resume %}
-                            <a href="{{member.resume.url}}" class=" desktop:block desktop:h-[35px] desktop:w-[130px] desktop:bg-cyan-600 desktop:text-white
-                            desktop:text-[15px] desktop:font-[yekan] desktop:rounded-[10px] desktop:text-center desktop:my-[20px] desktop:leading-[35px]  desktop:hover:bg-cyan-900 desktop:duration-200 desktop:transition-all"><span>دانلود رزومه</span></a>
-                          {% endif %}
+    <!-- Main Content -->
+    <main class="flex-grow w-full py-8 md:py-16 bg-cover bg-center" style="background-image: url('{% static "images/back.jpg" %}');">
+        <div class="container mx-auto px-4">
+            <div class="w-full md:w-[85%] lg:w-[70%] mx-auto bg-white bg-opacity-50 backdrop-blur-lg rounded-[25px] border-[3px] border-gray-300 shadow-2xl p-6 md:p-8 pb-[60px] md:pb-[120px]">
+                <!-- Team Section -->
+                <section class="w-full mt-4 md:mt-[30px]">
+                    <div class="px-4 md:px-[50px]">
+                        <div class="flex flex-col md:flex-row items-start md:items-center md:mt-[80px]">
+                            <h2 class="text-lg md:text-[20px] font-[yekan] font-bold">نام تیم:</h2>
+                            <h3 class="text-base md:text-[20px] font-[yekan] md:mr-[10px]">{{team.name}}</h3>
                         </div>
                     </div>
-                {% endfor %}
+
+                    <!-- Team Members Section -->
+                    <section class="mt-8 md:mt-[70px]">
+                        <h2 class="pr-4 md:pr-[50px] text-xl md:text-[20px] font-[yekan] mb-6">اعضای تیم:</h2>
+
+                        <!-- Members Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center px-2 md:px-4">
+                            {% for member in members %}
+                                <div class="w-full max-w-[310px] bg-gray-300 rounded-[15px] overflow-hidden shadow-lg mt-4 md:mt-[40px]">
+                                    <div class="p-4 md:p-[20px]">
+                                        <div class="aspect-square rounded-[15px] mb-4 overflow-hidden">
+                                            <img src="{{ member.image.url }}" alt="تصویر {{ member.fname }}" class="w-full h-full object-cover rounded-[15px]">
+                                        </div>
+                                        <h3 class="text-lg md:text-[20px] font-bold mb-2 md:mb-[10px]">{{member.fname}} {{member.lname}}</h3>
+                                        <p class="text-sm md:text-[16px] leading-6 md:leading-[28px] text-justify">{{member.description}}</p>
+
+                                        {% if member.resume %}
+                                            <div class="my-4 md:my-[20px]">
+                                                <a href="{{member.resume.url}}" class="inline-block py-2 px-4 md:h-[35px] md:w-[130px] bg-cyan-600 text-white text-sm md:text-[15px] font-[yekan] rounded-[10px] text-center hover:bg-cyan-900 transition-all duration-300">
+                                                    دانلود رزومه
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </section>
             </div>
-          </div>
-    </div>
-  </main>
-  <!--start footer-->
-  <footer class="desktop:w-full desktop:h-[150px] desktop:bg-blue-950 ">
-    <h5 class="desktop:text-white desktop:w-auto desktop:h-[90px]  desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[20px] desktop:text-center">مرکز پژوهشی گهر</h5>
-    <div class="info desktop:flex desktop:flex-row ">
-      <div class="info-right desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pr-[100px] desktop:hover:text-cyan-500 desktop:duration-300 desktop:transition-all desktop:cursor-pointer">
-         تلفن : 09945688202
-      </div>
-      <div class="useablity desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pl-[270px] desktop:pr-[380px]">تمامی حقوق محفوظ است © 2024</div>
-      <div class="email desktop:text-[20px] desktop:text-white desktop:font-[yekan]  desktop:hover:text-cyan-500 desktop:duration-300 desktop:transition-all desktop:cursor-pointer">ایمیل : gahar@gmail.com</div>
-      <div class="info-left"></div>
-    </div>
+        </div>
+    </main>
 
-  </footer>
-   <!--end footer-->
+    <!-- Footer -->
+    <footer class="w-full bg-blue-950 text-white py-6">
+        <div class="container mx-auto px-4">
+            <h5 class="text-center text-lg md:text-xl font-[yekan] mb-4">مرکز پژوهشی گهر</h5>
 
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-base hover:text-cyan-500 transition-all duration-300 cursor-pointer font-[yekan]">
+                    تلفن: 09945688202
+                </div>
+
+                <div class="text-base order-3 md:order-2 font-[yekan]">
+                    تمامی حقوق محفوظ است © 2024
+                </div>
+
+                <div class="text-base hover:text-cyan-500 transition-all duration-300 cursor-pointer order-2 md:order-3 font-[yekan]">
+                    ایمیل: gaharairg@gmail.com
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

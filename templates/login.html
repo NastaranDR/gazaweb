@@ -1,96 +1,244 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ورود اعضا</title>
-    <link rel="stylesheet" href="../static/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="theme-color" content="#172554">
+    <meta name="description" content="مرکز پژوهشی گهر - ورود اعضا به سامانه">
+    <title>ورود اعضا - مرکز پژوهشی گهر</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blue: {
+                            950: '#172554',
+                        },
+                        cyan: {
+                            500: '#06b6d4',
+                            700: '#0e7490',
+                            900: '#164e63',
+                        },
+                    },
+                    screens: {
+                        'mobile': '320px',
+                        'tablet': '481px',
+                        'laptop': '1025px',
+                        'desktop': '1200px',
+                    },
+                },
+                fontFamily: {
+                    'yekan': ['yekan', 'sans-serif'],
+                },
+            },
+        }
+    </script>
+
+    <!-- Vazirmatn Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'yekan';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'yekan', sans-serif;
+        }
+
+        .backdrop-blur-lg {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Form styling */
+        .form-control {
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #0e7490;
+            box-shadow: 0 0 0 2px rgba(14, 116, 144, 0.2);
+        }
+
+        /* Captcha styling */
+        .captcha {
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .captcha img {
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .captcha + a {
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: #0e7490;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body class="select-none box-border ">
-    <!--start header-->
-  <header class="desktop:w-full desktop:h-[90px] desktop:bg-blue-950 desktop:flex desktop:flex-row ">
-    <div class="header-right desktop:w-[55%] ">
-      <h5 class="declare desktop:text-white desktop:w-auto desktop:h-[90px]  desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[27px]">سایت پژوهشی گهر</h5>
-    </div>
-    <div class="header-left desktop:w-[45%]  desktop:flex desktop:flex-row desktop:justify-center desktop:items-center desktop:gap-x-20">
-      <div class="first-page"><a href="{% url 'home' %}" class="desktop:w-auto desktop:h-auto desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
-        صفحه اصلی
-      </a></div>
-      <div class="about-us"><a href="{% url 'about' %}" class="desktop:w-auto desktop:h-auto desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
-       درباره ما
-      </a></div>
-      <div class="user-login"><a href="{% url 'login' %}" class="desktop:w-auto desktop:h-auto desktop:px-[14px] desktop:py-[8px] desktop:rounded-[7px] desktop:bg-cyan-700 desktop:text-white desktop:text-[17px] desktop:hover:bg-cyan-900 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
-        ورود اعضا      </a></div>
-      <div class="user-login"></div>
-    </div>
-  </header>
-  <!--end header-->
-  <main style="background-image: url('{% static "images/back.jpg" %}');" class="desktop:w-full desktop:h-auto desktop:bg-cover desktop:flex desktop:flex-row desktop:justify-center desktop:py-[100px]">
-    <!--start login-->
-    <div class="main-center desktop:w-[500px] desktop:h-auto desktop:bg-white desktop:bg-opacity-[46%] desktop:backdrop-blur-lg desktop:rounded-[25px] desktop:pb-[100px] desktop:border-gray-300 desktop:border-solid desktop:border-[3px] desktop:shadow-2xl desktop:shadow-black">
-        <h5 class="desktop:text-center desktop:mt-[60px] desktop:text-[26px] desktop:font-[yekan]">ورود به سامانه</h5>
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="w-full h-auto md:h-[90px] bg-blue-950 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center py-4 md:h-[90px]">
+                <!-- Logo & Title -->
+                <div class="w-full md:w-auto text-center md:text-right mb-4 md:mb-0">
+                    <h5 class="text-white text-xl md:text-2xl lg:text-[27px] font-[yekan]">سایت پژوهشی گهر</h5>
+                </div>
 
-<form method="post" action="{% url 'login' %}" class="desktop:w-full desktop:h-auto desktop:mt-[40px] space-y-4">
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{{ next }}">  <!-- مقدار `next` -->
+                <!-- Mobile Menu Button -->
+                <button
+                    id="menuToggle"
+                    class="md:hidden absolute top-4 right-4 text-white focus:outline-none"
+                    aria-label="Toggle menu"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
 
-    <div class="text-right">
-        <label for="username" class="desktop:block desktop:w-full desktop:pr-[40px] desktop:text-[18px] desktop:font-[yekan] desktop:font-bold text-white">
-            نام کاربری:
-        </label>
-        <input type="text" id="username" name="username" required
-            class="desktop:block desktop:w-[88%] desktop:h-[45px] desktop:mt-[15px] desktop:m-auto desktop:outline-none desktop:px-5 desktop:border-[2px] desktop:border-cyan-500 desktop:rounded-[8px] caret-cyan-500 desktop:focus:w-[90%] desktop:focus:h-[48px] desktop:duration-300 desktop:transition-all bg-white bg-opacity-70 focus:ring focus:ring-blue-400">
-    </div>
+                <!-- Navigation -->
+                <nav id="mainNav" class="w-full md:w-auto hidden md:block">
+                    <ul class="flex flex-col md:flex-row items-center gap-4 md:gap-6 lg:gap-x-20">
+                        <li>
+                            <a href="{% url 'home' %}" class="block text-white text-base hover:text-cyan-500 transition-all duration-300 font-[yekan] py-2 md:py-0">
+                                صفحه اصلی
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'about' %}" class="block text-white text-base hover:text-cyan-500 transition-all duration-300 font-[yekan] py-2 md:py-0">
+                                درباره ما
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'login' %}" class="block px-[14px] py-[8px] rounded-[7px] bg-cyan-700 text-white text-base hover:bg-cyan-900 transition-all duration-300 font-[yekan] text-center">
+                                ورود اعضا
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-    <div class="text-right">
-        <label for="password" class="desktop:block desktop:w-full desktop:pr-[40px] desktop:text-[18px] desktop:font-[yekan] desktop:font-bold desktop:mt-[40px] text-white">
-            رمز کاربری:
-        </label>
-        <input type="password" id="password" name="password" required
-            class="desktop:block desktop:w-[88%] desktop:h-[45px] desktop:mt-[15px] desktop:m-auto desktop:outline-none desktop:px-5 desktop:border-[2px] desktop:border-cyan-500 desktop:rounded-[8px] caret-cyan-500 desktop:focus:w-[90%] desktop:focus:h-[48px] desktop:duration-300 desktop:transition-all bg-white bg-opacity-70 focus:ring focus:ring-blue-400">
-    </div>
+    <!-- Main Content -->
+    <main class="flex-grow w-full py-8 md:py-16 bg-cover bg-center" style="background-image: url('{% static "images/back.jpg" %}');">
+        <div class="container mx-auto px-4">
+            <div class="w-full max-w-md mx-auto bg-white bg-opacity-50 backdrop-blur-lg rounded-[25px] border-[3px] border-gray-300 shadow-2xl p-6 md:p-10 pb-12">
+                <h5 class="text-center text-xl md:text-2xl lg:text-[26px] font-[yekan] mt-6 md:mt-[60px] mb-8">ورود به سامانه</h5>
 
-    <div class="desktop:flex desktop:flex-col desktop:items-center desktop:justify-center desktop:mt-[30px]">
-        <label class="desktop:text-[18px] desktop:font-[yekan] desktop:font-bold text-white mb-2">
-            لطفاً کپچا را وارد کنید:
-        </label>
-        {{ form.captcha }}
-    </div>
+                <form method="post" action="{% url 'login' %}" class="space-y-6 md:space-y-8">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
 
-    {% if form.errors %}
-        <p class="text-red-500 text-sm text-center">نام کاربری یا رمز عبور اشتباه است</p>
-    {% endif %}
+                    <div class="text-right">
+                        <label for="username" class="block pr-4 md:pr-[40px] text-base md:text-lg font-[yekan] font-bold text-white mb-2">
+                            نام کاربری:
+                        </label>
+                        <div class="px-4">
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                required
+                                class="block w-full h-10 md:h-[45px] px-4 outline-none border-2 border-cyan-500 rounded-lg caret-cyan-500 bg-white bg-opacity-70 focus:shadow-md focus:border-cyan-700 transition-all duration-300"
+                            >
+                        </div>
+                    </div>
 
-    <button type="submit"
-        class="desktop:block desktop:w-[88%] desktop:h-[55px] desktop:rounded-[12px] desktop:bg-cyan-700 desktop:m-auto desktop:text-white desktop:mt-[70px] desktop:cursor-pointer hover:bg-cyan-900 transition">
-        ورود
-    </button>
-</form>
+                    <div class="text-right">
+                        <label for="password" class="block pr-4 md:pr-[40px] text-base md:text-lg font-[yekan] font-bold text-white mb-2">
+                            رمز کاربری:
+                        </label>
+                        <div class="px-4">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                required
+                                class="block w-full h-10 md:h-[45px] px-4 outline-none border-2 border-cyan-500 rounded-lg caret-cyan-500 bg-white bg-opacity-70 focus:shadow-md focus:border-cyan-700 transition-all duration-300"
+                            >
+                        </div>
+                    </div>
 
+                    <div class="flex flex-col items-center justify-center mt-8">
+                        <label class="text-base md:text-lg font-[yekan] font-bold text-white mb-2">
+                            لطفاً کپچا را وارد کنید:
+                        </label>
+                        <div class="captcha-container w-full flex justify-center">
+                            {{ form.captcha }}
+                        </div>
+                    </div>
 
-    </div>
-    <!--end login-->
-  </main>
-   <!--start footer-->
-   <footer class="desktop:w-full desktop:h-[150px] desktop:bg-blue-950 ">
-    <h5 class="desktop:text-white desktop:w-auto desktop:h-[90px]  desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[20px] desktop:text-center">مرکز پژوهشی گهر</h5>
-    <div class="info desktop:flex desktop:flex-row ">
-      <div class="info-right desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pr-[100px] desktop:hover:text-cyan-500 desktop:duration-300 desktop:transition-all desktop:cursor-pointer">
-         تلفن : 09945688202
-      </div>
-      <div class="useablity desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pl-[270px] desktop:pr-[380px]">تمامی حقوق محفوظ است © 2024</div>
-      <div class="email desktop:text-[20px] desktop:text-white desktop:font-[yekan]  desktop:hover:text-cyan-500 desktop:duration-300 desktop:transition-all desktop:cursor-pointer">ایمیل : gahar@gmail.com</div>
-      <div class="info-left"></div>
-    </div>
+                    {% if form.errors %}
+                        <p class="text-red-600 text-sm text-center bg-white bg-opacity-70 p-2 rounded-md">
+                            نام کاربری یا رمز عبور اشتباه است
+                        </p>
+                    {% endif %}
 
-  </footer>
-   <!--end footer-->
-  <script>
+                    <div class="pt-4">
+                        <button
+                            type="submit"
+                            class="block w-[90%] md:w-[88%] h-12 md:h-[55px] mx-auto rounded-xl bg-cyan-700 text-white font-[yekan] cursor-pointer hover:bg-cyan-900 transition-all duration-300"
+                        >
+                            ورود
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-blue-950 text-white py-6">
+        <div class="container mx-auto px-4">
+            <h5 class="text-center text-lg md:text-xl font-[yekan] mb-4">مرکز پژوهشی گهر</h5>
+
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-base hover:text-cyan-500 transition-all duration-300 cursor-pointer font-[yekan]">
+                    تلفن: 09945688202
+                </div>
+
+                <div class="text-base order-3 md:order-2 font-[yekan]">
+                    تمامی حقوق محفوظ است © 2024
+                </div>
+
+                <div class="text-base hover:text-cyan-500 transition-all duration-300 cursor-pointer order-2 md:order-3 font-[yekan]">
+                    ایمیل: gaharairg@gmail.com
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('hidden');
+        });
+
+        // Function to refresh captcha
         function refreshCaptcha() {
             var img = document.querySelector(".captcha img");
             img.src = img.src.split("?")[0] + "?reload=" + new Date().getTime();
         }
-  </script>
+    </script>
 </body>
 </html>

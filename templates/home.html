@@ -1,96 +1,199 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مرکز پژوهشی گهر</title>
-  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="theme-color" content="#172554">
+    <meta name="description" content="مرکز پژوهشی گهر - یک مجموعه پیشرو در زمینه هوش مصنوعی و بینایی ماشین">
+    <title>مرکز پژوهشی گهر</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blue: {
+                            950: '#172554',
+                        },
+                        cyan: {
+                            500: '#06b6d4',
+                            700: '#0e7490',
+                            900: '#164e63',
+                        },
+                    },
+                    screens: {
+                        'mobile': '320px',
+                        'tablet': '481px',
+                        'laptop': '1025px',
+                        'desktop': '1200px',
+                    },
+                },
+                fontFamily: {
+                    'yekan': ['yekan', 'sans-serif'],
+                },
+            },
+        }
+    </script>
+
+    <!-- Vazirmatn Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'yekan';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'yekan', sans-serif;
+        }
+
+        .backdrop-blur-lg {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
 </head>
-<body class="select-none box-border ">
-  <!--start header-->
-  <header class="desktop:w-full desktop:h-[90px] desktop:bg-blue-950 desktop:flex desktop:flex-row ">
-    <div class="header-right desktop:w-[55%] ">
-      <h5 class="declare desktop:text-white desktop:w-auto desktop:h-[90px]  desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[27px]">سایت پژوهشی گهر</h5>
-    </div>
-    <div class="header-left desktop:w-[45%]  desktop:flex desktop:flex-row desktop:justify-center desktop:items-center desktop:gap-x-20">
-      <div class="first-page"><a href="{% url 'home' %}" class="desktop:w-auto desktop:h-auto desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
-        صفحه اصلی
-      </a></div>
-      <div class="about-us"><a href="{% url 'about' %}" class="desktop:w-auto desktop:h-auto desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
-       درباره ما
-      </a></div>
-      <div class="user-login"><a href="{% url 'login' %}" class="desktop:w-auto desktop:h-auto desktop:px-[14px] desktop:py-[8px] desktop:rounded-[7px] desktop:bg-cyan-700 desktop:text-white desktop:text-[17px] desktop:hover:bg-cyan-900 desktop:transition-all desktop:duration-300 desktop:font-[yekan] ">
-        ورود اعضا      </a></div>
-      <div class="user-login"></div>
-    </div>
-  </header>
-  <!--end header-->
-  <main style="background-image: url('{% static "images/back.jpg" %}');" class="desktop:w-full desktop:h-auto desktop:bg-cover desktop:flex desktop:flex-row desktop:justify-center desktop:py-[100px]">
-    <!--start information-->
-    <div class="main-center desktop:w-[70%] desktop:h-auto desktop:bg-white desktop:bg-opacity-[50%] desktop:backdrop-blur-lg desktop:rounded-[25px] desktop:pb-[120px] desktop:border-gray-300 desktop:border-solid desktop:border-[3px] desktop:shadow-2xl desktop:shadow-black">
-      <h5 class="desktop:w-full desktop:h-auto desktop:font-[yekan] desktop:text-[24px] desktop:opacity-[100%] desktop:text-center desktop:mt-[60px]">مرکز پژوهشی گهر</h5>
-      <p class="desktop:w-[80%] desktop:text-center desktop:m-auto desktop:mt-[30px] desktop:leading-9">مرکز پژوهشی گهر  یک مجموعه پیشرو در زمینه هوش مصنوعی و بینایی ماشین است که با تکیه بر دانش فنی و تخصص تیم تحقیقاتی خود، توانسته است دستاوردهای مهمی در این حوزه به دست آورد. هدف ما توسعه فناوری‌های نوین و ارائه راهکارهای هوشمند برای صنایع مختلف از جمله پزشکی، امنیت، خودروسازی، تولید و تجارت الکترونیک است.
+<body class="min-h-screen flex flex-col select-none">
+    <!-- Header -->
+    <header class="w-full h-auto md:h-[90px] bg-blue-950 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center py-4 md:h-[90px]">
+                <!-- Logo & Title -->
+                <div class="w-full md:w-auto text-center md:text-right mb-4 md:mb-0">
+                    <h5 class="text-white text-xl md:text-2xl lg:text-[27px] font-[yekan]">سایت پژوهشی گهر</h5>
+                </div>
 
-      </p>
+                <!-- Mobile Menu Button -->
+                <button
+                    id="menuToggle"
+                    class="md:hidden absolute top-4 right-4 text-white focus:outline-none"
+                    aria-label="Toggle menu"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
 
-
-      <a href="{% url 'request_collaboration' %}" class="desktop:block desktop:w-fit desktop:h-fit desktop:py-[10px] desktop:px-[14px] desktop:rounded-[12px] desktop:bg-cyan-700 desktop:font-[yekan] desktop:mt-[35px] desktop:text-white desktop:m-auto desktop:hover:bg-cyan-900 desktop:transition-all desktop:duration-300"><span>درخواست همکاری</span></a>
-
-      <div class="cards-wrap desktop:w-full desktop:h-auto desktop:mt-[70px]">
-        <div class="card-top desktop:w-full desktop:h-auto"><h5 class="desktop:h-auto desktop:pr-[50px] desktop:text-[20px] desktop:font-[yekan]">تیم های فعلی:</h5></div>
-        <div class="card-bottom desktop:w-full desktop:h-auto desktop:flex desktop:flex-row desktop:justify-evenly desktop:flex-wrap desktop:gap-y-7">
-
-      {% for team in experts %}
-          <div class="card desktop:w-[310px] desktop:h-auto desktop:bg-gray-300 desktop:rounded-[15px] desktop:overflow-hidden desktop:shadow-lg  desktop:mt-[40px]">
-            <img src="{% static 'images/teams.png' %}" alt="Sample Image" class="desktop:w-full desktop:h-[200px] desktop:object-cover">
-            <div class="desktop:p-[20px]">
-              <h3 class="desktop:text-[20px] desktop:font-bold desktop:mb-[10px]">{{team.name}}</h3>
-              <p class="desktop:text-[16px] desktop:leading-[28px] desktop:text-justify">{{team.description}}</p>
-
+                <!-- Navigation -->
+                <nav id="mainNav" class="w-full md:w-auto hidden md:block">
+                    <ul class="flex flex-col md:flex-row items-center gap-4 md:gap-6 lg:gap-x-20">
+                        <li>
+                            <a href="{% url 'home' %}" class="block text-white text-base hover:text-cyan-500 transition-all duration-300 font-[yekan] py-2 md:py-0">
+                                صفحه اصلی
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'about' %}" class="block text-white text-base hover:text-cyan-500 transition-all duration-300 font-[yekan] py-2 md:py-0">
+                                درباره ما
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'login' %}" class="block px-[14px] py-[8px] rounded-[7px] bg-cyan-700 text-white text-base hover:bg-cyan-900 transition-all duration-300 font-[yekan] text-center">
+                                ورود اعضا
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-          </div>
-      {% endfor %}
-      {% for team in intermediates %}
-          <div class="card desktop:w-[310px] desktop:h-auto desktop:bg-gray-300 desktop:rounded-[15px] desktop:overflow-hidden desktop:shadow-lg  desktop:mt-[40px]">
-            <img src="{% static 'images/teams.png' %}" alt="Sample Image" class="desktop:w-full desktop:h-[200px] desktop:object-cover">
-            <div class="desktop:p-[20px]">
-              <h3 class="desktop:text-[20px] desktop:font-bold desktop:mb-[10px]">{{team.name}}</h3>
-              <p class="desktop:text-[16px] desktop:leading-[28px] desktop:text-justify">{{team.description}}</p>
+        </div>
+    </header>
 
+    <!-- Main Content -->
+    <main class="flex-grow w-full py-8 md:py-[100px] bg-cover bg-center" style="background-image: url('{% static "images/back.jpg" %}');">
+        <div class="container mx-auto px-4">
+            <div class="w-full md:w-[85%] lg:w-[70%] mx-auto bg-white bg-opacity-50 backdrop-blur-lg rounded-[25px] border-[3px] border-gray-300 shadow-2xl p-6 md:p-8 pb-[60px] md:pb-[120px]">
+                <!-- Main Section -->
+                <section class="mb-12">
+                    <h1 class="w-full text-center text-xl md:text-2xl lg:text-[24px] font-[yekan] mt-6 md:mt-[60px] mb-6">مرکز پژوهشی گهر</h1>
+
+                    <p class="w-[95%] md:w-[80%] text-center mx-auto mt-4 md:mt-[30px] leading-7 md:leading-9 text-sm md:text-base">
+                        مرکز پژوهشی گهر یک مجموعه پیشرو در زمینه هوش مصنوعی و بینایی ماشین است که با تکیه بر دانش فنی و تخصص تیم تحقیقاتی خود، توانسته است دستاوردهای مهمی در این حوزه به دست آورد. هدف ما توسعه فناوری‌های نوین و ارائه راهکارهای هوشمند برای صنایع مختلف از جمله پزشکی، امنیت، خودروسازی، تولید و تجارت الکترونیک است.
+                    </p>
+
+                    <div class="flex justify-center mt-6 md:mt-[35px]">
+                        <a href="{% url 'request_collaboration' %}" class="inline-block py-2 px-4 md:py-[10px] md:px-[14px] rounded-xl bg-cyan-700 text-white hover:bg-cyan-900 transition-all duration-300 text-sm md:text-base font-[yekan]">
+                            درخواست همکاری
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Teams Section -->
+                <section class="mt-10 md:mt-[70px]">
+                    <h2 class="h-auto pr-4 md:pr-[50px] text-lg md:text-[20px] font-[yekan] mb-6">تیم های فعلی:</h2>
+
+                    <!-- Teams Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center px-2 md:px-4">
+                        {% for team in experts %}
+                            <div class="w-full max-w-[310px] h-auto bg-gray-300 rounded-[15px] overflow-hidden shadow-lg mt-6 md:mt-[40px]">
+                                <img src="{% static 'images/teams.png' %}" alt="تصویر تیم" class="w-full h-[200px] object-cover">
+                                <div class="p-4 md:p-[20px]">
+                                    <h3 class="text-lg md:text-[20px] font-bold mb-2 md:mb-[10px]">{{team.name}}</h3>
+                                    <p class="text-sm md:text-[16px] leading-6 md:leading-[28px] text-justify">{{team.description}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        {% for team in intermediates %}
+                            <div class="w-full max-w-[310px] h-auto bg-gray-300 rounded-[15px] overflow-hidden shadow-lg mt-6 md:mt-[40px]">
+                                <img src="{% static 'images/teams.png' %}" alt="تصویر تیم" class="w-full h-[200px] object-cover">
+                                <div class="p-4 md:p-[20px]">
+                                    <h3 class="text-lg md:text-[20px] font-bold mb-2 md:mb-[10px]">{{team.name}}</h3>
+                                    <p class="text-sm md:text-[16px] leading-6 md:leading-[28px] text-justify">{{team.description}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        {% for team in beginners %}
+                            <div class="w-full max-w-[310px] h-auto bg-gray-300 rounded-[15px] overflow-hidden shadow-lg mt-6 md:mt-[40px]">
+                                <img src="{% static 'images/teams.png' %}" alt="تصویر تیم" class="w-full h-[200px] object-cover">
+                                <div class="p-4 md:p-[20px]">
+                                    <h3 class="text-lg md:text-[20px] font-bold mb-2 md:mb-[10px]">{{team.name}}</h3>
+                                    <p class="text-sm md:text-[16px] leading-6 md:leading-[28px] text-justify">{{team.description}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
             </div>
-          </div>
-      {% endfor %}
-      {% for team in beginners %}
-          <div class="card desktop:w-[310px] desktop:h-auto desktop:bg-gray-300 desktop:rounded-[15px] desktop:overflow-hidden desktop:shadow-lg  desktop:mt-[40px]">
-            <img src="{% static 'images/teams.png' %}" alt="Sample Image" class="desktop:w-full desktop:h-[200px] desktop:object-cover">
-            <div class="desktop:p-[20px]">
-              <h3 class="desktop:text-[20px] desktop:font-bold desktop:mb-[10px]">{{team.name}}</h3>
-              <p class="desktop:text-[16px] desktop:leading-[28px] desktop:text-justify">{{team.description}}</p>
-
-            </div>
-          </div>
-      {% endfor %}
-
-
-    </div>
-    <!--end information-->
+        </div>
     </main>
-    <!--start footer-->
-  <footer class="desktop:w-full desktop:h-[150px] desktop:bg-blue-950 ">
-    <h5 class="desktop:text-white desktop:w-auto desktop:h-[90px]  desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[20px] desktop:text-center">مرکز پژوهشی گهر</h5>
-    <div class="info desktop:flex desktop:flex-row ">
-      <div class="info-right desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pr-[100px] desktop:hover:text-cyan-500 desktop:duration-300 desktop:transition-all desktop:cursor-pointer">
-         تلفن : 09945688202
-      </div>
-      <div class="useablity desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pl-[270px] desktop:pr-[380px]">تمامی حقوق محفوظ است © 2024</div>
-      <div class="email desktop:text-[20px] desktop:text-white desktop:font-[yekan]  desktop:hover:text-cyan-500 desktop:duration-300 desktop:transition-all desktop:cursor-pointer">ایمیل : gahar@gmail.com</div>
-      <div class="info-left"></div>
-    </div>
 
-  </footer>
-   <!--end footer-->
+    <!-- Footer -->
+    <footer class="w-full bg-blue-950 text-white py-6">
+        <div class="container mx-auto px-4">
+            <h5 class="text-center text-lg md:text-xl font-[yekan] mb-4">مرکز پژوهشی گهر</h5>
 
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-base hover:text-cyan-500 transition-all duration-300 cursor-pointer font-[yekan]">
+                    تلفن: 09945688202
+                </div>
 
+                <div class="text-base order-3 md:order-2 font-[yekan]">
+                    تمامی حقوق محفوظ است © 2024
+                </div>
+
+                <div class="text-base hover:text-cyan-500 transition-all duration-300 cursor-pointer order-2 md:order-3 font-[yekan]">
+                    ایمیل: gaharairg@gmail.com
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

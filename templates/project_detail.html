@@ -1,80 +1,179 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ project.title }}</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="theme-color" content="#172554">
+    <meta name="description" content="مرکز پژوهشی گهر - جزئیات پروژه {{ project.title }}">
+    <title>{{ project.title }} - مرکز پژوهشی گهر</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blue: {
+                            950: '#172554',
+                        },
+                        cyan: {
+                            500: '#06b6d4',
+                            700: '#0e7490',
+                            900: '#164e63',
+                        },
+                    },
+                    screens: {
+                        'mobile': '320px',
+                        'tablet': '481px',
+                        'laptop': '1025px',
+                        'desktop': '1200px',
+                    },
+                },
+                fontFamily: {
+                    'yekan': ['yekan', 'sans-serif'],
+                },
+            },
+        }
+    </script>
+
+    <!-- Vazirmatn Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'yekan';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'yekan', sans-serif;
+        }
+
+        .backdrop-blur-lg {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
 </head>
-<body class="select-none box-border">
-
-<!-- Header -->
-<header class="desktop:w-full desktop:h-[90px] desktop:bg-blue-950 desktop:flex desktop:flex-row">
-    <div class="header-right desktop:w-[55%]">
-        <h5 class="declare desktop:text-white desktop:w-auto desktop:h-[90px] desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[27px]">
-            سایت پژوهشی گهر
-        </h5>
-    </div>
-    <div class="header-left desktop:w-[45%] desktop:flex desktop:flex-row desktop:justify-center desktop:items-center desktop:gap-x-20">
-        <div class="first-page">
-            <a href="{% url 'members' %}" class="desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan]">
-                اعضای تیم
-            </a>
-        </div>
-        <div class="about-us">
-            <a href="{% url 'profile' %}" class="desktop:text-white desktop:text-[17px] desktop:hover:text-cyan-500 desktop:transition-all desktop:duration-300 desktop:font-[yekan]">
-                کارتابل
-            </a>
-        </div>
-        <div class="user-login">
-            <a href="{% url 'logout' %}" class="desktop:px-[14px] desktop:py-[8px] desktop:rounded-[7px] desktop:bg-cyan-700 desktop:text-white desktop:text-[17px] desktop:hover:bg-cyan-900 desktop:transition-all desktop:duration-300 desktop:font-[yekan]">
-                خروج
-            </a>
-        </div>
-    </div>
-</header>
-
-<!-- Main -->
-<main style="background-image: url('{% static "images/back.jpg" %}');" class="desktop:w-full desktop:h-auto desktop:bg-cover desktop:flex desktop:justify-center desktop:py-[100px]">
-    <div class="main-center desktop:w-[70%] desktop:bg-white desktop:bg-opacity-[50%] desktop:backdrop-blur-lg desktop:rounded-[25px] desktop:pb-[120px] desktop:border-gray-300 desktop:border-[3px] desktop:shadow-2xl desktop:shadow-black">
-        <div class="profile desktop:flex desktop:flex-row desktop:mt-[30px]">
-            <div class="script desktop:w-1/2 desktop:mr-[50px]">
-                <div class="first-name desktop:flex desktop:flex-row desktop:mt-[80px]">
-                    <h2 class="desktop:text-[22px] desktop:font-[yekan]">عنوان:</h2>
-                    <h3 class="desktop:text-[22px] desktop:font-[yekan] desktop:mr-[10px]">{{ project.title }}</h3>
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="w-full h-auto md:h-[90px] bg-blue-950 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center py-4 md:h-[90px]">
+                <!-- Logo & Title -->
+                <div class="w-full md:w-auto text-center md:text-right mb-4 md:mb-0">
+                    <h5 class="text-white text-xl md:text-2xl lg:text-[27px] font-[yekan]">سایت پژوهشی گهر</h5>
                 </div>
-                <div class="first-name desktop:flex desktop:flex-row desktop:mt-[80px]">
-                    <h2 class="desktop:text-[22px] desktop:font-[yekan]">توضیحات:</h2>
-                    <h3 class="desktop:text-[22px] desktop:font-[yekan] desktop:mr-[10px]">{{ project.description }}</h3>
-                </div>
-                {% if member.resume %}
-                <a href="{{ project.file.url }}" class="desktop:block desktop:h-[45px] desktop:w-[150px] desktop:bg-cyan-600 desktop:text-white desktop:text-[18px] desktop:font-[yekan] desktop:rounded-[10px] desktop:text-center desktop:mt-[40px] desktop:leading-[45px] desktop:hover:bg-cyan-900 desktop:duration-200 desktop:transition-all">
-                    دانلود فایل نیاز تفضیلی
-                </a>
-                {% endif %}
+
+                <!-- Mobile Menu Button -->
+                <button
+                    id="menuToggle"
+                    class="md:hidden absolute top-4 right-4 text-white focus:outline-none"
+                    aria-label="Toggle menu"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <!-- Navigation -->
+                <nav id="mainNav" class="w-full md:w-auto hidden md:block">
+                    <ul class="flex flex-col md:flex-row items-center gap-4 md:gap-6 lg:gap-x-20">
+                        <li>
+                            <a href="{% url 'members' %}" class="block text-white text-base hover:text-cyan-500 transition-all duration-300 font-[yekan] py-2 md:py-0">
+                                اعضای تیم
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'profile' %}" class="block text-white text-base hover:text-cyan-500 transition-all duration-300 font-[yekan] py-2 md:py-0">
+                                کارتابل
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'logout' %}" class="block px-[14px] py-[8px] rounded-[7px] bg-cyan-700 text-white text-base hover:bg-cyan-900 transition-all duration-300 font-[yekan] text-center">
+                                خروج
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
-    </div>
-</main>
+    </header>
 
-<!-- Footer -->
-<footer class="desktop:w-full desktop:h-[150px] desktop:bg-blue-950">
-    <h5 class="desktop:text-white desktop:h-[90px] desktop:leading-[90px] desktop:pr-[60px] desktop:font-[yekan] desktop:text-[20px] desktop:text-center">
-        مرکز پژوهشی گهر
-    </h5>
-    <div class="info desktop:flex desktop:flex-row">
-        <div class="info-right desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pr-[100px] desktop:hover:text-cyan-500 desktop:transition-all desktop:cursor-pointer">
-            تلفن : 09945688202
-        </div>
-        <div class="useablity desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:pl-[270px] desktop:pr-[380px]">
-            تمامی حقوق محفوظ است © 2024
-        </div>
-        <div class="email desktop:text-[20px] desktop:text-white desktop:font-[yekan] desktop:hover:text-cyan-500 desktop:transition-all desktop:cursor-pointer">
-            ایمیل : gahar@gmail.com
-        </div>
-    </div>
-</footer>
+    <!-- Main Content -->
+    <main class="flex-grow w-full py-8 md:py-16 bg-cover bg-center" style="background-image: url('{% static "images/back.jpg" %}');">
+        <div class="container mx-auto px-4">
+            <div class="w-full md:w-[85%] lg:w-[70%] mx-auto bg-white bg-opacity-50 backdrop-blur-lg rounded-[25px] border-[3px] border-gray-300 shadow-2xl p-6 md:p-8 pb-[60px] md:pb-[120px]">
+                <!-- Project Detail Section -->
+                <section class="w-full mt-4 md:mt-[30px]">
+                    <div class="w-full px-4 md:px-[50px]">
+                        <div class="space-y-6 md:space-y-8 md:mt-[30px]">
+                            <div class="flex flex-col">
+                                <h2 class="text-lg md:text-[22px] font-[yekan] font-bold mb-2">عنوان:</h2>
+                                <p class="text-base md:text-xl font-[yekan] mr-0 md:mr-[10px] bg-white bg-opacity-50 p-3 rounded-lg">{{ project.title }}</p>
+                            </div>
 
+                            <div class="flex flex-col">
+                                <h2 class="text-lg md:text-[22px] font-[yekan] font-bold mb-2">توضیحات:</h2>
+                                <div class="mr-0 md:mr-[10px] bg-white bg-opacity-50 p-4 rounded-lg">
+                                    <p class="text-sm md:text-lg font-[yekan] text-justify leading-7">{{ project.description }}</p>
+                                </div>
+                            </div>
+
+                            {% if project.file %}
+                            <div class="mt-8 md:mt-[40px]">
+                                <a href="{{ project.file.url }}" class="inline-block py-2 px-4 md:h-[45px] md:w-[220px] bg-cyan-600 text-white text-base md:text-[18px] font-[yekan] rounded-[10px] text-center hover:bg-cyan-900 transition-all duration-300">
+                                    دانلود فایل نیاز تفضیلی
+                                </a>
+                            </div>
+                            {% endif %}
+
+                            <div class="mt-6 pt-4 border-t border-gray-300 border-opacity-50">
+                                <a href="{% url 'profile' %}" class="inline-block py-2 px-4 bg-blue-950 text-white text-sm md:text-base font-[yekan] rounded-[10px] hover:bg-blue-800 transition-all duration-300">
+                                    بازگشت به کارتابل
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-blue-950 text-white py-6">
+        <div class="container mx-auto px-4">
+            <h5 class="text-center text-lg md:text-xl font-[yekan] mb-4">مرکز پژوهشی گهر</h5>
+
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-base hover:text-cyan-500 transition-all duration-300 cursor-pointer font-[yekan]">
+                    تلفن: 09945688202
+                </div>
+
+                <div class="text-base order-3 md:order-2 font-[yekan]">
+                    تمامی حقوق محفوظ است © 2024
+                </div>
+
+                <div class="text-base hover:text-cyan-500 transition-all duration-300 cursor-pointer order-2 md:order-3 font-[yekan]">
+                    ایمیل: gaharairg@gmail.com
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

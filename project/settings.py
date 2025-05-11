@@ -47,7 +47,7 @@ CRISPY_TEMPLATE_PACK = "tailwind"
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['gaharai.ir', 'www.gaharai.ir', '37.32.5.107', 'localhost', '127.0.0.1']
@@ -186,13 +186,15 @@ USE_TZ = True
 
 USE_L10N = True
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')        # آدرس جیمیل کارفرما
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')             # رمز اپلیکیشن که کارفرما ساخته
+EMAIL_HOST_USER = 'gaharairg@gmail.com'
+EMAIL_HOST_PASSWORD = 'geeqlhgzqfjdjdhg'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 

@@ -1,288 +1,209 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ورود اعضا</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="theme-color" content="#172554">
+    <meta name="description" content="مرکز پژوهشی گهر - فرم درخواست همکاری">
+    <title>درخواست همکاری - مرکز پژوهشی گهر</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blue: {
+                            950: '#172554',
+                        },
+                        cyan: {
+                            500: '#06b6d4',
+                            700: '#0e7490',
+                            900: '#164e63',
+                        },
+                    },
+                    screens: {
+                        'mobile': '320px',
+                        'tablet': '481px',
+                        'laptop': '1025px',
+                        'desktop': '1200px',
+                    },
+                },
+                fontFamily: {
+                    'yekan': ['yekan', 'sans-serif'],
+                },
+            },
+        }
+    </script>
+    
+    <!-- Vazirmatn Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Reset styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        @font-face {
+            font-family: 'yekan';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
         }
-
+        
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.5;
-            background: url('../static/images/back.jpg') no-repeat center center fixed;
-            background-size: cover;
+            font-family: 'Vazirmatn', 'yekan', sans-serif;
         }
-
-
-        /* Header styles */
-        header {
-            width: 100%;
-            height: 90px;
-            background-color: #172554; /* blue-950 */
-            display: flex;
-            flex-direction: row;
-        }
-
-        .header-right {
-            width: 55%;
-        }
-
-        .header-left {
-            width: 45%;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .declare {
-            color: white;
-            height: 90px;
-            line-height: 90px;
-            padding-right: 60px;
-            font-size: 27px;
-        }
-
-        header a {
-            color: white;
-            text-decoration: none;
-            font-size: 17px;
-            transition: all 0.3s;
-        }
-
-        header a:hover {
-            color: #06b6d4; /* cyan-500 */
-        }
-
-        .user-login a {
-            padding: 8px 14px;
-            border-radius: 7px;
-            background-color: #0e7490; /* cyan-700 */
-        }
-
-        .user-login a:hover {
-            background-color: #164e63; /* cyan-900 */
-        }
-
-        /* Main content styles */
-        main {
-            width: 100%;
-            height: auto;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            padding: 100px 0;
-        }
-
-        .main-center {
-            width: 500px;
-            height: auto;
-            background-color: rgba(255, 255, 255, 0.46);
+        
+        .backdrop-blur-lg {
             backdrop-filter: blur(8px);
-            border-radius: 25px;
-            padding-bottom: 100px;
-            border: 3px solid #d1d5db;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 1);
+            -webkit-backdrop-filter: blur(8px);
         }
-
-        h5 {
-            text-align: center;
-            margin-top: 60px;
-            font-size: 26px;
-        }
-
-        /* Form styles */
-        .form-container {
-            max-width: 32rem;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 1.5rem;
-            margin-top: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        /* Custom styles for form fields */
-        .form-field {
-            margin-bottom: 1.5rem;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .field-label {
-            display: block;
-            font-weight: 500;
-            color: #374151;
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-        }
-
-        .field-input {
+        
+        /* Form field styling */
+        .form-field .field-wrapper input, 
+        .form-field .field-wrapper textarea,
+        .form-field .field-wrapper select {
             width: 100%;
             padding: 0.75rem;
             border-radius: 0.5rem;
             border: 1px solid #d1d5db;
             background-color: white;
+            transition: all 0.3s;
         }
-
-        .field-input:focus {
+        
+        .form-field .field-wrapper input:focus, 
+        .form-field .field-wrapper textarea:focus,
+        .form-field .field-wrapper select:focus {
             outline: none;
             border-color: #0e7490;
             box-shadow: 0 0 0 2px rgba(14, 116, 144, 0.2);
         }
-
-        .field-error {
-            color: #ef4444;
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-        }
-
-        .field-help {
-            font-size: 0.75rem;
-            color: #6b7280;
-            margin-top: 0.25rem;
-        }
-
-        /* Footer styles */
-        footer {
-            width: 100%;
-            height: 150px;
-            background-color: #172554; /* blue-950 */
-        }
-
-        footer h5 {
-            color: white;
-            height: 90px;
-            line-height: 90px;
-            padding-right: 60px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        .info {
+        
+        .specialty-checkbox {
             display: flex;
-            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
-
-        .info div {
-            font-size: 20px;
-            color: white;
+        
+        .specialty-checkbox div {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
         }
-
-        .info-right {
-            padding-right: 100px;
-        }
-
-        .useablity {
-            padding-left: 270px;
-            padding-right: 380px;
-        }
-
-        .info div:hover {
-            color: #06b6d4; /* cyan-500 */
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        /* Button styles */
-        button[type="submit"] {
-            display: block;
-            width: 88%;
-            height: 55px;
-            border-radius: 12px;
-            background-color: #0e7490; /* cyan-700 */
-            margin: auto;
-            color: white;
-            margin-top: 40px;
-            cursor: pointer;
-            border: none;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #164e63; /* cyan-900 */
+        
+        .specialty-checkbox input[type="checkbox"] {
+            width: auto;
         }
     </style>
 </head>
-<body>
-    <!--start header-->
-  <header>
-    <div class="header-right">
-      <h5 class="declare">سایت پژوهشی گهر</h5>
-    </div>
-    <div class="header-left">
-      <div class="first-page"><a href="{% url 'home' %}">
-        صفحه اصلی
-      </a></div>
-      <div class="about-us"><a href="{% url 'about' %}">
-       درباره ما
-      </a></div>
-      <div class="user-login"><a href="{% url 'login' %}">
-        ورود اعضا      </a></div>
-      <div class="user-login"></div>
-    </div>
-  </header>
-  <!--end header-->
-  <main>
-    <!--start login-->
-    <div class="main-center">
-        <h5>درخواست همکاری</h5>
-
-        <div class="form-container">
-            <form method="post" enctype="multipart/form-data">
-
-                {% csrf_token %}
-
-                {% for field in form %}
-                    <div class="form-field">
-                        <label class="field-label">{{ field.label }}</label>
-                        <div class="field-wrapper">
-                            {{ field }}
-                        </div>
-                        {% if field.help_text %}
-                            <p class="field-help">{{ field.help_text }}</p>
-                        {% endif %}
-                        {% for error in field.errors %}
-                            <p class="field-error">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-
-                <button type="submit">
-                    ارسال درخواست
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="w-full h-auto md:h-[90px] bg-blue-950 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center py-4 md:h-[90px]">
+                <!-- Logo & Title -->
+                <div class="w-full md:w-auto text-center md:text-right mb-4 md:mb-0">
+                    <h5 class="text-white text-xl md:text-2xl lg:text-[27px] font-[yekan]">سایت پژوهشی گهر</h5>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button 
+                    id="menuToggle"
+                    class="md:hidden absolute top-4 right-4 text-white focus:outline-none"
+                    aria-label="Toggle menu"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
                 </button>
-            </form>
+                
+                <!-- Navigation -->
+                <nav id="mainNav" class="w-full md:w-auto hidden md:block">
+                    <ul class="flex flex-col md:flex-row items-center gap-4 md:gap-6 lg:gap-x-20">
+                        <li>
+                            <a href="{% url 'home' %}" class="block text-white text-base hover:text-cyan-500 transition-all duration-300 font-[yekan] py-2 md:py-0">
+                                صفحه اصلی
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'about' %}" class="block text-white text-base hover:text-cyan-500 transition-all duration-300 font-[yekan] py-2 md:py-0">
+                                درباره ما
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'login' %}" class="block px-[14px] py-[8px] rounded-[7px] bg-cyan-700 text-white text-base hover:bg-cyan-900 transition-all duration-300 font-[yekan] text-center">
+                                ورود اعضا
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </div>
-    <!--end login-->
-  </main>
-   <!--start footer-->
-   <footer>
-    <h5>مرکز پژوهشی گهر</h5>
-    <div class="info">
-      <div class="info-right">
-         تلفن : 09945688202
-      </div>
-      <div class="useablity">تمامی حقوق محفوظ است © 2024</div>
-      <div class="email">ایمیل : gahar@gmail.com</div>
-      <div class="info-left"></div>
-    </div>
-  </footer>
-   <!--end footer-->
+    </header>
+    
+    <!-- Main Content -->
+    <main class="flex-grow w-full py-8 md:py-16 bg-cover bg-center" style="background-image: url('{% static "images/back.jpg" %}');">
+        <div class="container mx-auto px-4">
+            <div class="w-full max-w-[500px] mx-auto bg-white bg-opacity-50 backdrop-blur-lg rounded-[25px] border-[3px] border-gray-300 shadow-2xl p-6 md:p-10">
+                <h5 class="text-center text-xl md:text-2xl font-[yekan] my-8">درخواست همکاری</h5>
+                
+                <div class="max-w-[32rem] mx-auto bg-white bg-opacity-70 p-4 md:p-6 rounded-lg shadow-md mt-4">
+                    <form method="post" enctype="multipart/form-data" class="space-y-6">
+                        {% csrf_token %}
+                        
+                        {% for field in form %}
+                            <div class="form-field">
+                                <label class="block font-medium text-gray-700 mb-2 text-sm md:text-base">{{ field.label }}</label>
+                                <div class="field-wrapper">
+                                    {{ field }}
+                                </div>
+                                {% if field.help_text %}
+                                    <p class="text-xs md:text-sm text-gray-500 mt-1">{{ field.help_text }}</p>
+                                {% endif %}
+                                {% for error in field.errors %}
+                                    <p class="text-red-500 text-xs md:text-sm mt-1">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                        
+                        <button type="submit" class="w-full md:w-[88%] h-[45px] md:h-[55px] rounded-[12px] bg-cyan-700 mx-auto text-white mt-[40px] cursor-pointer hover:bg-cyan-900 transition font-[yekan] block">
+                            ارسال درخواست
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="w-full bg-blue-950 text-white py-6">
+        <div class="container mx-auto px-4">
+            <h5 class="text-center text-lg md:text-xl font-[yekan] mb-4">مرکز پژوهشی گهر</h5>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-base hover:text-cyan-500 transition-all duration-300 cursor-pointer font-[yekan]">
+                    تلفن: 09945688202
+                </div>
+                
+                <div class="text-base order-3 md:order-2 font-[yekan]">
+                    تمامی حقوق محفوظ است © 2024
+                </div>
+                
+                <div class="text-base hover:text-cyan-500 transition-all duration-300 cursor-pointer order-2 md:order-3 font-[yekan]">
+                    ایمیل: gaharairg@gmail.com
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

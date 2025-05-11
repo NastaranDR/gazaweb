@@ -6,6 +6,7 @@ from django.db.models import Count
 import django_jalali.db.models as jmodels
 import datetime
 from django.utils import timezone
+from datetime import timedelta
 
 
 
@@ -158,14 +159,14 @@ class Request_for_Collaboration(models.Model):
     resume = models.FileField(upload_to='media/requests/', null=True, blank=True, verbose_name="رزومه")
     specialties = models.ManyToManyField('Specialty', verbose_name="تخصص ها")
     description = models.TextField(verbose_name="توضیحات" ,  blank=True , null=True)
-    otp_code = models.CharField(max_length=6 , null=True , blank=False)
-    otp_created_at = models.DateTimeField(blank=True , null=True)
+    otp_code = models.CharField(max_length=6, blank=True, null=True)
+    otp_created_at = models.DateTimeField(blank=True, null=True)
     is_verified = models.BooleanField(default=False)
 
     def is_otp_valid(self):
-        if not self.otp_created_at:
-            return False
-        return timezone.now() < self.otp_created_at + datetime.timedelta(minutes=5)
+        if self.otp_created_at:
+            return timezone.now() <= self.otp_created_at + timedelta(minutes=5)
+        return False
 
     class Meta:
         verbose_name= "درخواست همکاری"
