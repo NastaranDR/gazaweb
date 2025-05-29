@@ -11,4 +11,5 @@ urlpatterns = [
     path('about/', views.contact, name='about'),
     path('members/', views.team_members , name='members'),
     path('verify/<int:collab_id>/', views.verify_otp_view, name='verify_otp'),
+    path('resend-otp/<int:collab_id>/', views.resend_otp_view, name='resend_otp'),
 ]

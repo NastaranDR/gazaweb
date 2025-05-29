@@ -134,7 +134,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center px-2 md:px-4">
                         {% for team in experts %}
                             <div class="w-full max-w-[310px] h-auto bg-gray-300 rounded-[15px] overflow-hidden shadow-lg mt-6 md:mt-[40px]">
-                                <img src="{% static 'images/teams.png' %}" alt="تصویر تیم" class="w-full h-[200px] object-cover">
+                                <img src="{{ team.image.url }}" alt="تصویر تیم" class="w-full h-[200px] object-cover">
                                 <div class="p-4 md:p-[20px]">
                                     <h3 class="text-lg md:text-[20px] font-bold mb-2 md:mb-[10px]">{{team.name}}</h3>
                                     <p class="text-sm md:text-[16px] leading-6 md:leading-[28px] text-justify">{{team.description}}</p>
@@ -144,7 +144,7 @@
 
                         {% for team in intermediates %}
                             <div class="w-full max-w-[310px] h-auto bg-gray-300 rounded-[15px] overflow-hidden shadow-lg mt-6 md:mt-[40px]">
-                                <img src="{% static 'images/teams.png' %}" alt="تصویر تیم" class="w-full h-[200px] object-cover">
+                                <img src="{{ team.image.url }}" alt="تصویر تیم" class="w-full h-[200px] object-cover">
                                 <div class="p-4 md:p-[20px]">
                                     <h3 class="text-lg md:text-[20px] font-bold mb-2 md:mb-[10px]">{{team.name}}</h3>
                                     <p class="text-sm md:text-[16px] leading-6 md:leading-[28px] text-justify">{{team.description}}</p>
@@ -154,7 +154,7 @@
 
                         {% for team in beginners %}
                             <div class="w-full max-w-[310px] h-auto bg-gray-300 rounded-[15px] overflow-hidden shadow-lg mt-6 md:mt-[40px]">
-                                <img src="{% static 'images/teams.png' %}" alt="تصویر تیم" class="w-full h-[200px] object-cover">
+                                <img src="{{ team.image.url }}" alt="تصویر تیم" class="w-full h-[200px] object-cover">
                                 <div class="p-4 md:p-[20px]">
                                     <h3 class="text-lg md:text-[20px] font-bold mb-2 md:mb-[10px]">{{team.name}}</h3>
                                     <p class="text-sm md:text-[16px] leading-6 md:leading-[28px] text-justify">{{team.description}}</p>

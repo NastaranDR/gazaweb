@@ -11,6 +11,7 @@ from datetime import timedelta
 
 
 
+
 class Specialty(models.Model):
     name=models.CharField(max_length=50 , unique=True , verbose_name="عنوان تخصص")
 
@@ -64,7 +65,7 @@ class Member(models.Model):
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE , verbose_name="اکانت")
     resume=models.FileField(upload_to='media/resumes/',null=True , blank=True, verbose_name="رزومه")
-    image=models.ImageField(upload_to='media/images/',null=True , blank=True, verbose_name="تصویر")
+    image=models.ImageField(upload_to='media/images/members/',null=True , blank=True, verbose_name="تصویر")
     role=models.CharField(max_length=7 , choices=ROLE_CHOICES , default='member', verbose_name="نقش")
     team=models.ForeignKey('Team', on_delete=models.CASCADE , related_name='members', verbose_name="نام تیم")
     specialties=models.ManyToManyField('Specialty', verbose_name="تخصص ها")
@@ -95,6 +96,7 @@ class Team(models.Model):
     specialties = models.ManyToManyField('Specialty', related_name='teams', verbose_name="تخصص ها")
     description = models.TextField(blank = False , null= True ,verbose_name= "توضیحات")
     level=models.CharField(choices=LEVEL_CHOICES , max_length=12 , verbose_name="سطح تیم", default='beginner')
+    image=models.ImageField(upload_to='media/images/teams/',null=True , blank=True, verbose_name="تصویر")
 
 
     class Meta:
@@ -142,10 +144,9 @@ class Project(models.Model):
 class Request_for_Collaboration(models.Model):
     fname=models.CharField(max_length=50 , null=False , blank=False, verbose_name= "نام" )
     lname=models.CharField(max_length=50 , null=False , blank=False, verbose_name= "نام خانوادگی" )
-    email = models.EmailField(null=True, blank=False, verbose_name= "ایمیل" )
+    email = models.EmailField(null=True, blank=False, verbose_name=  "ایمیل" )
     phone_number = PhoneNumberField(
         region="IR",
-        unique=True,
         verbose_name="شماره تماس" ,
         validators=[
             RegexValidator(
@@ -162,6 +163,8 @@ class Request_for_Collaboration(models.Model):
     otp_code = models.CharField(max_length=6, blank=True, null=True)
     otp_created_at = models.DateTimeField(blank=True, null=True)
     is_verified = models.BooleanField(default=False)
+    otp_attempts = models.PositiveIntegerField(default=0)
+    otp_last_attempt_at = models.DateTimeField(null=True, blank=True)
 
     def is_otp_valid(self):
         if self.otp_created_at:

@@ -53,6 +53,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['gaharai.ir', 'www.gaharai.ir', '37.32.5.107', 'localhost', '127.0.0.1']
 #فقط از طریق این دامنه ها به سرور متصل میشویم(در حالت توسعه)
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 LOGGING = {
     'version': 1,
@@ -91,7 +94,8 @@ INSTALLED_APPS = [
     'django_jalali',
     'captcha',
     "crispy_forms",
-    "crispy_tailwind"
+    "crispy_tailwind",
+
 ]
 
 MIDDLEWARE = [
