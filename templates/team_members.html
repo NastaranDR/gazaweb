@@ -106,7 +106,16 @@
             </div>
         </div>
     </header>
-
+    <script>
+      document.addEventListener("contextmenu", e => e.preventDefault());
+      document.onkeydown = function(e) {
+        if (e.keyCode == 123 || // F12
+            (e.ctrlKey && e.shiftKey && e.keyCode == 73) || // Ctrl+Shift+I
+            (e.ctrlKey && e.keyCode == 85)) { // Ctrl+U
+          return false;
+        }
+      };
+    </script>
     <!-- Main Content -->
     <main class="flex-grow w-full py-8 md:py-16 bg-cover bg-center" style="background-image: url('{% static "images/back.webp" %}');">
         <div class="container mx-auto px-4">

@@ -62,6 +62,16 @@
         }
     </style>
 </head>
+<script>
+  document.addEventListener("contextmenu", e => e.preventDefault());
+  document.onkeydown = function(e) {
+    if (e.keyCode == 123 || // F12
+        (e.ctrlKey && e.shiftKey && e.keyCode == 73) || // Ctrl+Shift+I
+        (e.ctrlKey && e.keyCode == 85)) { // Ctrl+U
+      return false;
+    }
+  };
+</script>
 <body class="min-h-screen flex flex-col">
     <!-- Header -->
     <header class="w-full h-auto md:h-[90px] bg-blue-950 shadow-md">

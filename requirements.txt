@@ -1,7 +1,7 @@
 Django==4.2.3
 psycopg2-binary==2.9.10
 djangorestframework==3.14.0
-django-crispy-forms==1.14.0
+django-crispy-forms
 Pillow==11.1.0
 django-filter==23.2
 # برای احراز هویت و مدیریت کاربران
