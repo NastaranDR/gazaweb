@@ -96,7 +96,7 @@ class Team(models.Model):
     specialties = models.ManyToManyField('Specialty', related_name='teams', verbose_name="تخصص ها")
     description = models.TextField(blank = False , null= True ,verbose_name= "توضیحات")
     level=models.CharField(choices=LEVEL_CHOICES , max_length=12 , verbose_name="سطح تیم", default='beginner')
-    image=models.ImageField(upload_to='media/images/teams/',null=True , blank=True, verbose_name="تصویر")
+    image=models.ImageField(upload_to='media/images/teams/',null=False , blank=False, verbose_name="تصویر" , default="../static/images/teams.png")
 
 
     class Meta:
